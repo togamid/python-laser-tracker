@@ -139,15 +139,15 @@ class LaserTracker(object):
         """
         center = None
 
-        countours = cv2.findContours(mask, cv2.RETR_EXTERNAL,
+        contours = cv2.findContours(mask, cv2.RETR_EXTERNAL,
                                      cv2.CHAIN_APPROX_SIMPLE)[-2]
 
         # only proceed if at least one contour was found
-        if len(countours) > 0:
+        if len(contours) > 0:
             # find the largest contour in the mask, then use
             # it to compute the minimum enclosing circle and
             # centroid
-            c = max(countours, key=cv2.contourArea)
+            c = max(contours, key=cv2.contourArea)
             ((x, y), radius) = cv2.minEnclosingCircle(c)
             moments = cv2.moments(c)
             if moments["m00"] > 0:
